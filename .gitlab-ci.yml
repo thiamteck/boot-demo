@@ -23,6 +23,7 @@ release:
       artifacts: true
   release:
     name: 'Release Executables $CI_COMMIT_SHORT_SHA'
+    description: 'Release by release-cli'
     # tag_name is a mendatory field and can not be an empty string
     tag_name: '$CI_COMMIT_SHORT_SHA'
     assets:
