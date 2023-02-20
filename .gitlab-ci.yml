@@ -28,8 +28,7 @@ release:
     assets:
       links:
         - name: 'Executable'
-          url: 'http://gitlab.unifiedcomms.com/thiamteck/boot-demo/-/jobs/${GE_JOB_ID}/artifacts/download?file_type=archive'
-  rules:
-    - if: $CI_COMMIT_TAG
+          url: 'http://gitlab.unifiedcomms.com/thiamteck/boot-demo/-/jobs/${GE_JOB_ID}/artifacts/download?file_type=archive'    
   only:
+    - if: $CI_COMMIT_TAG
     - main
