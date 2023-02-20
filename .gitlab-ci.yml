@@ -11,7 +11,10 @@ maven-build-stage:
   artifacts:
     paths: 
       - target/boot-demo-0.0.1-SNAPSHOT.jar
-      
+    reports:
+      # To ensure we've access to this file in the next stage
+      dotenv: generate_executables.env  
+
 release:
   stage: release
   image: registry.gitlab.com/gitlab-org/release-cli:latest
