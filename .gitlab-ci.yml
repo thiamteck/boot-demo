@@ -49,7 +49,7 @@ publish_job:
   script: 
     # - mvn clean package -Dmaven.test.skip=true 
     # cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar extract && cd ..
-    - docker build -t boot-demo:1.0.0 . 
+    - export DOCKER_HOST=tcp://localhost:2375 && docker build -t boot-demo:1.0.0 . 
     - docker save -o boot-demo-1.0.0.tar boot-demo:1.0.0
   artifacts:
     paths: 
