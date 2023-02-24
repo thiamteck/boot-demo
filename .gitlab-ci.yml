@@ -43,13 +43,13 @@ publish_job:
   image: docker:20-dind
   services:
   - name: docker:20-dind
-    entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
-
+    alias: docker
+    command: [ "--tls=false" ]
   needs: ["maven-build-stage"]
   script: 
     # - mvn clean package -Dmaven.test.skip=true 
     # cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar extract && cd ..
-    - export DOCKER_HOST=tcp://localhost:2375 && docker build -t boot-demo:1.0.0 . 
+    - docker build -t boot-demo:1.0.0 . 
     - docker save -o boot-demo-1.0.0.tar boot-demo:1.0.0
   artifacts:
     paths: 
