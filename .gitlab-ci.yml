@@ -9,7 +9,6 @@ maven-build-stage:
   script: 
     - echo GE_JOB_ID=$CI_JOB_ID >> generate_executables.env
     - mvn clean package
-    - java -Djarmode=layertools -jar target/boot-demo-0.0.1-SNAPSHOT.jar
   artifacts:
     paths: 
       - target/boot-demo-0.0.1-SNAPSHOT.jar
@@ -49,7 +48,6 @@ publish_job:
   before_script:
     - docker info  
   script: 
-    - ls 
     - docker build -t boot-demo:1.0.0 . 
     - docker save -o boot-demo-1.0.0.tar boot-demo:1.0.0
   artifacts:
