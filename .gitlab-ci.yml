@@ -40,9 +40,9 @@ release_job:
           
 publish_job:
   stage: publish
-  image: docker:20-dind
+  image: docker:20-dind-rootless
   services:
-  - name: docker:20-dind
+  - name: docker:20-dind-rootless
     alias: docker
     command: [ "--tls=false" ]
   needs: ["maven-build-stage"]
