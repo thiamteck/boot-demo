@@ -39,6 +39,7 @@ release_job:
           
 publish_job:
   stage: publish
+  image: maven:3.8.7-eclipse-temurin-8-alpine
   script: 
     - mvn clean package -Dmaven.test.skip=true 
     - cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar extract && cd ..
