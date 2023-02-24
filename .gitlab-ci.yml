@@ -41,6 +41,10 @@ release_job:
 publish_job:
   stage: publish
   image: docker:dind
+  services:
+  - name: docker:dind
+    entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
+
   needs: ["maven-build-stage"]
   script: 
     # - mvn clean package -Dmaven.test.skip=true 
