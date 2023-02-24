@@ -47,12 +47,11 @@ publish_job:
     alias: docker
     command: [ "--tls=false" ]
   before_script:
-  - docker info
-  
+    - docker info  
   variables:
-    #DOCKER_HOST: tcp://docker:2375
-    #DOCKER_DRIVER: overlay2
-    #DOCKER_TLS_CERTDIR: ""
+    DOCKER_HOST: tcp://docker:2375
+    DOCKER_DRIVER: overlay2
+    DOCKER_TLS_CERTDIR: ""
   script: 
     # - mvn clean package -Dmaven.test.skip=true 
     # cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar extract && cd ..
