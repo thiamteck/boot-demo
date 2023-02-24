@@ -3,7 +3,7 @@ ARG JAR_FILE=target/*.jar
 COPY ${JAR_FILE} application.jar
 RUN java -Djarmode=layertools -jar application.jar extract
 
-FROM eclipse-temurin:8-jdk
+FROM eclipse-temurin:8-jdk-alpine
 EXPOSE 8080
 COPY --from=builder dependencies/ ./
 COPY --from=builder snapshot-dependencies/ ./
