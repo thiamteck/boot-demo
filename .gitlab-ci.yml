@@ -9,7 +9,7 @@ maven-build-stage:
   script: 
     - echo GE_JOB_ID=$CI_JOB_ID >> generate_executables.env
     - mvn clean package
-    - cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar
+    - java -Djarmode=layertools -jar target/boot-demo-0.0.1-SNAPSHOT.jar
   artifacts:
     paths: 
       - target/boot-demo-0.0.1-SNAPSHOT.jar
@@ -48,14 +48,8 @@ publish_job:
     command: [ "--tls=false" ]
   before_script:
     - docker info  
-  variables:
-    #DOCKER_HOST: tcp://docker:2375
-    #DOCKER_DRIVER: overlay2
-    #DOCKER_TLS_CERTDIR: ""
   script: 
-    # - mvn clean package -Dmaven.test.skip=true 
-    # cd target && java -Djarmode=layertools -jar boot-demo-0.0.1-SNAPSHOT.jar extract && cd ..
-    - ls target
+    - ls 
     - docker build -t boot-demo:1.0.0 . 
     - docker save -o boot-demo-1.0.0.tar boot-demo:1.0.0
   artifacts:
