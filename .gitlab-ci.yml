@@ -40,9 +40,9 @@ release_job:
           
 publish_job:
   stage: publish
-  image: docker:dind
+  image: docker:20-dind
   services:
-  - name: docker:dind
+  - name: docker:20-dind
     entrypoint: ["dockerd-entrypoint.sh", "--tls=false"]
 
   needs: ["maven-build-stage"]
