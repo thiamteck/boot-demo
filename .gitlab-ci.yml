@@ -40,6 +40,7 @@ release_job:
           
 publish_job:
   stage: publish
+  image: docker:latest
   needs: ["maven-build-stage"]
   script: 
     # - mvn clean package -Dmaven.test.skip=true 
