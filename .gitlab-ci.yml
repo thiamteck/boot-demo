@@ -48,7 +48,7 @@ publish_job:
   before_script:
     - docker info  
   script: 
-    - docker build -t boot-demo:1.0.0 . 
+    - DOCKER_BUILDKIT=1 docker build -t boot-demo:1.0.0 . 
     - docker save -o boot-demo-1.0.0.tar boot-demo:1.0.0
   artifacts:
     paths: 
