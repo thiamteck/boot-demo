@@ -1,0 +1,41 @@
+---
+- name: Deploy Spring Boot Standalone Module
+  hosts: your_target_server   # Replace with the hostname or IP address of your deployment server
+  become: yes                 # Use sudo to execute commands with elevated privileges (if required)
+
+  tasks:
+    - name: Copy JAR file to the server
+      copy:
+        src: .target/boot-demo-*.jar  # Replace with the path to your Spring Boot JAR file
+        dest: /opt/sample-app/boot-demo.jar  # Replace with the desired destination path on the server
+      become: yes
+
+    - name: Stop the existing application (if running)
+      shell: "pkill -f 'boot-demo.jar'"
+      ignore_errors: yes
+      become: yes
+
+    - name: Start the Spring Boot application
+      shell: "nohup java -jar /opt/sample-app/boot-demo.jar > /opt/sample-app/application.log 2>&1 &"
+      async: 0
+      poll: 0
+      become: yes
+
+    - name: Wait for the application to start
+      wait_for:
+        path: /opt/sample-app/application.log
+        search_regex: 'Started Application in'
+        timeout: 300   # Adjust the timeout as needed
+
+    # Additional tasks can be added here, such as database migrations, configuration updates, etc.
+
+    - name: Ensure the application is running
+      shell: "pgrep -f 'boot-demo.jar'"
+      register: app_pid
+      ignore_errors: yes
+      become: yes
+
+    - name: Fail the playbook if the application is not running
+      fail:
+        msg: "Application is not running."
+      when: app_pid.rc != 0
