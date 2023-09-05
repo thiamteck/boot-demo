@@ -9,7 +9,6 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -DskipTests clean package'
-                updateGitlabCommitStatus name: 'build', state: 'success'
             }
         }
         stage('Test') {
