@@ -19,7 +19,7 @@ pipeline {
         stage('Deploy') {
             steps {
                 sh 'echo deploy'
-                archiveArtifacts artifacts: '../target/*.jar', onlyIfSuccessful: true
+                archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
             }
         }
     }
