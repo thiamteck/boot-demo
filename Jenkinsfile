@@ -4,7 +4,7 @@ pipeline {
         stage('Build') {
             steps {
                 sh 'mvn -DskipTests clean package'
-                sh 'docker build -t boot-demo:1.0.0 . '
+                updateGitlabCommitStatus name: 'build', state: 'success'
             }
         }
         stage('Test') {
