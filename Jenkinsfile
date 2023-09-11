@@ -12,17 +12,18 @@ pipeline {
     stages {
         stage('Build') {
             steps {
-                withMaven {
-                    sh 'mvn -DskipTests clean package'
-                }
+                sh 'mvn -DskipTests clean package'
+//                 withMaven {
+//                     sh 'mvn -DskipTests clean package'
+//                 }
             }
         }
         stage('Test') {
             steps {
-                sh 'ls -al target'
-                withMaven {
-                    sh 'mvn test'
-                }
+                sh 'mvn test'
+//                 withMaven {
+//                     sh 'mvn test'
+//                 }
             }
         }
         stage('Deploy') {
