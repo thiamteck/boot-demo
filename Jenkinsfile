@@ -34,7 +34,7 @@ pipeline {
             steps {
                 sh 'echo deploy'
                 archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
-                sh 'ansible-playbook hello-world.yml'
+                sh 'ansible-playbook ansible-hello-world.yml'
             }
         }
     }
