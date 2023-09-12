@@ -5,7 +5,11 @@ pipeline {
 //             args '-v /root/.m2:/root/.m2'
 //         }
 //     }
-    agent any
+
+//     agent any
+
+    agent { label 'ansible' }
+
     tools {
             maven 'Maven 3.5.x'
     }
