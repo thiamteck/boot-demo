@@ -32,6 +32,10 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+                timeout(time: 15, unit: "MINUTES") {
+                    input message: 'Do you want to approve the deployment?', ok: 'Yes'
+                }
+
                 sh 'echo deploy'
                 archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
                 sh 'ansible-playbook ansible-hello-world.yml'
