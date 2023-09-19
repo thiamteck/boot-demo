@@ -1,0 +1,15 @@
+#!/usr/bin/expect
+
+set timeout -1
+
+# Read passphrase from file
+set passphrase_file [open "temp-passphrase.tmp" r]
+gets $passphrase_file passphrase
+close $passphrase_file
+
+spawn ssh-add temp-private-key
+
+expect "Enter passphrase for temp-private-key.tmp:"
+send "$passphrase\r"
+
+expect eof
