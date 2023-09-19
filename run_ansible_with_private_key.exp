@@ -14,10 +14,14 @@ close $username_file
 
 # ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=unified --private-key=temp-private-key
 spawn bash -c "ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$username --private-key=temp-private-key.tmp"
-expect "Enter passphrase for key "
-send "$passphrase\r"
 
 expect "This key is not known by any other names"
 send "yes\r"
+
+
+expect "Enter passphrase for key "
+send "$passphrase\r"
+
+
 
 expect eof
