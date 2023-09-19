@@ -3,3 +3,5 @@ all:
     remote_server:
       ansible_host: 10.168.48.82
       ansible_connection: paramiko
+      ansible_user: hehehehe
+      ansible_ssh_pass: hahahahaha
