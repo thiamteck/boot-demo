@@ -30,9 +30,9 @@ pipeline {
 
                 withCredentials([sshUserPrivateKey(credentialsId: 'deploy_credential', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
                     sh 'cp $KEY_FILE temp-private-key.tmp'
-                    sh 'echo $PASSPHRASE > temp-passphrase.tmp'
+                    sh ' echo $PASSPHRASE > temp-passphrase.tmp'
                     sh 'eval `ssh-agent`'
-                    sh 'expect -c "spawn ssh-add temp-private-key.tmp; expect \"Enter passphrase for temp-private-key.tmp:\"; send \"`cat temp-passphrase.tmp`\r\"; expect eof"'
+                    sh 'expect -c "spawn ssh-add temp-private-key.tmp; expect \"Enter passphrase for temp-private-key.tmp:\"; send \"$PASSPHRASE\r\"; expect eof"'
 //                     sh 'echo "$PASSPHRASE" | ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$USERNAME --private-key=$KEY_FILE'
                     sh 'ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$USERNAME '
 
