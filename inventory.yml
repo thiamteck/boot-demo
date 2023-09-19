@@ -1,0 +1,5 @@
+all:
+  hosts:
+    remote_server:
+      ansible_host: 10.168.48.82
+      ansible_connection: paramiko
