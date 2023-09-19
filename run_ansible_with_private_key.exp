@@ -17,4 +17,7 @@ spawn bash -c "ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user
 expect "Enter passphrase for key "
 send "$passphrase\r"
 
+expect "This key is not known by any other names"
+send "yes\r"
+
 expect eof
