@@ -1,6 +1,6 @@
 ---
 - name: Deploy Spring Boot Standalone Module
-  hosts: 10.168.48.82   # Replace with the hostname or IP address of your deployment server
+  hosts: remote-server   # Replace with the hostname or IP address of your deployment server
   become: yes                 # Use sudo to execute commands with elevated privileges (if required)
 
   tasks:
