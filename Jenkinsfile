@@ -10,9 +10,9 @@ pipeline {
 
     agent { label 'ansible' }
 
-    tools {
-            maven 'Maven 3.5.x'
-    }
+//     tools {
+//             maven 'Maven 3.5.x'
+//     }
     stages {
         stage('Build') {
             steps {
