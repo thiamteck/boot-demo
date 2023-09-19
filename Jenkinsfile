@@ -26,7 +26,11 @@ pipeline {
                 // archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
                 // sh 'ansible-playbook ansible-hello-world.yml'
                 // sh 'ansible-playbook -T 0 -vvvv -i inventory.yml -c paramiko ansible_deploy.yml -e "ansible_ssh_user=${REMOTE_SERVER_CREDENTIALS_USR} ansible_ssh_pass=${REMOTE_SERVER_CREDENTIALS_PSW}"'
-                sh 'ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml '
+                // sh 'ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml '
+
+                withCredentials([sshUserPrivateKey(credentialsId: 'deploy_credential', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
+                    sh 'echo "$PASSPHRASE" | ansible-playbook -i inventory.yml deploy.yml --user=$USERNAME --private-key=$KEY_FILE'
+                }
 
             }
         }
