@@ -2,6 +2,6 @@ all:
   hosts:
     remote_server:
       ansible_host: 10.168.48.82
-      ansible_connection: ssh
+#      ansible_connection: ssh
 #      ansible_user: hehehehe
 #      ansible_ssh_pass: hahahahaha
