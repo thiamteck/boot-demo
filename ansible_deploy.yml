@@ -1,13 +1,13 @@
 ---
 - name: Deploy Spring Boot Standalone Module
-  hosts: your_target_server   # Replace with the hostname or IP address of your deployment server
+  hosts: 10.168.48.82   # Replace with the hostname or IP address of your deployment server
   become: yes                 # Use sudo to execute commands with elevated privileges (if required)
 
   tasks:
     - name: Copy JAR file to the server
       copy:
-        src: .target/boot-demo-*.jar  # Replace with the path to your Spring Boot JAR file
-        dest: /opt/sample-app/boot-demo.jar  # Replace with the desired destination path on the server
+        src: ./target/boot-demo-*.jar  # Replace with the path to your Spring Boot JAR file
+        dest: /unified/test-ansible/modules/boot-demo.jar  # Replace with the desired destination path on the server
       become: yes
 
     - name: Stop the existing application (if running)
@@ -16,14 +16,14 @@
       become: yes
 
     - name: Start the Spring Boot application
-      shell: "nohup java -jar /opt/sample-app/boot-demo.jar > /opt/sample-app/application.log 2>&1 &"
+      shell: "nohup java -jar /unified/test-ansible/modules/boot-demo.jar > /unified/test-ansible/logs/application.log 2>&1 &"
       async: 0
       poll: 0
       become: yes
 
     - name: Wait for the application to start
       wait_for:
-        path: /opt/sample-app/application.log
+        path: /unified/test-ansible/logs/application.log
         search_regex: 'Started Application in'
         timeout: 300   # Adjust the timeout as needed
 

@@ -1,33 +1,19 @@
 pipeline {
-//     agent {
-//         docker {
-//             image 'maven:3.9.4-eclipse-temurin-17-alpine'
-//             args '-v /root/.m2:/root/.m2'
-//         }
-//     }
-
-//     agent any
-
     agent { label 'ansible' }
 
-//     tools {
-//             maven 'Maven 3.5.x'
-//     }
+    environment {
+        REMOTE_SERVER_CREDENTIALS = credentials('deploy-credential')
+    }
+
     stages {
         stage('Build') {
             steps {
                 sh 'mvn -DskipTests clean package'
-//                 withMaven {
-//                     sh 'mvn -DskipTests clean package'
-//                 }
             }
         }
         stage('Test') {
             steps {
                 sh 'mvn test'
-//                 withMaven {
-//                     sh 'mvn test'
-//                 }
             }
         }
         stage('Deploy') {
@@ -37,8 +23,9 @@ pipeline {
                 }
 
                 sh 'echo deploy'
-                archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
-                sh 'ansible-playbook ansible-hello-world.yml'
+                // archiveArtifacts artifacts: 'target/*.jar', onlyIfSuccessful: true
+                // sh 'ansible-playbook ansible-hello-world.yml'
+                sh 'ansible-playbook ansible_deploy.yml -e "ansible_ssh_user=${REMOTE_SERVER_CREDENTIALS_USR} ansible_ssh_pass=${REMOTE_SERVER_CREDENTIALS_PSW}"'
             }
         }
     }
