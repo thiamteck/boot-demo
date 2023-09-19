@@ -1,0 +1,22 @@
+#!/usr/bin/expect
+
+set timeout -1
+
+# Read passphrase from file
+set passphrase_file [open "temp-passphrase.tmp" r]
+gets $passphrase_file passphrase
+close $passphrase_file
+
+# Read username from file
+set username_file [open "temp-username.tmp" r]
+gets $username_file username
+close $username_file
+
+# ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=unified --private-key=temp-private-key
+spawn bash -c "ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$username --private-key=temp-private-key.tmp"
+expect "Enter passphrase for key "
+send "$passphrase\r"
+
+spawn bash -c ""
+
+expect eof
