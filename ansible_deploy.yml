@@ -1,7 +1,6 @@
 ---
 - name: Deploy Spring Boot Standalone Module
   hosts: remote_server   # Replace with the hostname or IP address of your deployment server
-  gather_facts: no
   vars:
     ansible_shell_type: sh
   # become: yes                 # Use sudo to execute commands with elevated privileges (if required)
@@ -11,7 +10,7 @@
       copy:
         src: ./target/boot-demo-*.jar  # Replace with the path to your Spring Boot JAR file
         dest: /unified/test-ansible/modules/boot-demo.jar  # Replace with the desired destination path on the server
-      become: yes
+      # become: yes
 
     - name: Stop the existing application (if running)
       shell: "pkill -f 'boot-demo.jar'"
