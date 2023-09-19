@@ -2,7 +2,7 @@ pipeline {
     agent { label 'ansible' }
 
     environment {
-        REMOTE_SERVER_CREDENTIALS = credentials('deploy-credential')
+        REMOTE_SERVER_CREDENTIALS = credentials('deploy_credential')
     }
 
     stages {
