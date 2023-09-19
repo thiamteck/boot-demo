@@ -7,7 +7,7 @@ set passphrase_file [open "temp-passphrase.tmp" r]
 gets $passphrase_file passphrase
 close $passphrase_file
 
-spawn ssh-agent bash -c 'ssh-add temp-private-key.tmp'
+spawn bash -c "eval \$(ssh-agent -s) && ssh-add temp-private-key.tmp"
 
 expect "Enter passphrase for temp-private-key.tmp:"
 send "$passphrase\r"
