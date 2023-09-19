@@ -2,6 +2,8 @@
 - name: Deploy Spring Boot Standalone Module
   hosts: remote_server   # Replace with the hostname or IP address of your deployment server
   gather_facts: no
+  vars:
+    ansible_shell_type: sh
   become: yes                 # Use sudo to execute commands with elevated privileges (if required)
 
   tasks:
