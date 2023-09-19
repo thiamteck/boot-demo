@@ -8,7 +8,6 @@ gets $passphrase_file passphrase
 close $passphrase_file
 
 spawn bash -c "eval \$(ssh-agent -s) && ssh-add temp-private-key.tmp"
-
 expect "Enter passphrase for temp-private-key.tmp:"
 send "$passphrase\r"
 
