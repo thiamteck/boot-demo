@@ -13,9 +13,9 @@ gets $username_file username
 close $username_file
 
 # ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=unified --private-key=temp-private-key
-spawn bash -c "ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$username --private-key=temp-private-key.tmp"
+spawn sh -c "ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$username --private-key=temp-private-key.tmp"
 
-expect "This key is not known by any other names"
+expect ""
 send "yes\r"
 
 
