@@ -29,7 +29,7 @@ pipeline {
                 // sh 'ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml '
 
                 withCredentials([sshUserPrivateKey(credentialsId: 'deploy_credential', keyFileVariable: 'KEY_FILE', passphraseVariable: 'PASSPHRASE', usernameVariable: 'USERNAME')]) {
-//                     sh 'cp $KEY_FILE temp-private-key.tmp'
+                     sh 'cp $KEY_FILE temp-private-key.tmp'
 //                     sh ' echo $PASSPHRASE > temp-passphrase.tmp'
 //                     sh ' echo $USERNAME > temp-username.tmp'
 //                     sh 'expect run_ansible_with_private_key.exp'
