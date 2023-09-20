@@ -26,7 +26,7 @@
     - name: Wait for the application to start
       wait_for:
         path: /unified/test-ansible/logs/application.log
-        search_regex: 'Started Application in'
+        search_regex: ' Started '
         timeout: 300   # Adjust the timeout as needed
 
     # Additional tasks can be added here, such as database migrations, configuration updates, etc.
