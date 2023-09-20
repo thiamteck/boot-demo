@@ -37,7 +37,7 @@ pipeline {
 
 //                     sh 'expect import_private_key.exp'
 //                     sh 'echo "$PASSPHRASE" | ansible-playbook -vvvv -i inventory.yml ansible_deploy.yml --user=$USERNAME --private-key=$KEY_FILE'
-                    sh 'ansible-playbook -vvvv -i inventory.yml -c paramiko ansible_deploy.yml --user=$USERNAME'
+                    sh 'ansible-playbook -vvvv -i inventory.yml -c paramiko ansible_deploy.yml --user=$USERNAME --private-key=$KEY_FILE'
 
                 }
 
